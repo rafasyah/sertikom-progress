@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class kelas_detail extends Model
 {
-
     use HasFactory;
-    protected $fillables = [
+
+    protected $fillable = [
         'siswa_id',
         'kelas_id',
-        'tahun_ajar_id',  
+        'tahun_ajar_id',
         'status',
     ];
 

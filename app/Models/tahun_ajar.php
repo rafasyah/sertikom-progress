@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class tahun_ajar extends Model
@@ -15,11 +16,11 @@ class tahun_ajar extends Model
 
     public function siswas()
     {
-        return $this->hasMany(siswa::class, );
+        return $this->hasMany(siswa::class);
     }
 
     public function kelas_details()
     {
-        return $this->hasMany(kelas_detail::class, );
+        return $this->hasMany(kelas_detail::class);
     }
 }

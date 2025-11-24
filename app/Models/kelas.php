@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class kelas extends Model
@@ -12,11 +13,17 @@ class kelas extends Model
         'nama_kelas',
        'level_kelas',
        'jurusan_id',
+       'tahun_ajar_id',
    ];
 
    public function jurusan()
    {
-       return $this->belongsTo(jurusans::class);
+       return $this->belongsTo(jurusans::class, 'jurusan_id');
+   }
+
+   public function tahun_ajar()
+   {
+       return $this->belongsTo(tahun_ajar::class);
    }
    
    public function siswas()
