@@ -43,6 +43,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $jurusans = jurusans::all();
         $kelas = kelas::all();
         $tahunAjars = tahun_ajar::all();
@@ -54,6 +57,9 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'nisn' => 'required|unique:siswas',
             'nama_lengkap' => 'required',
@@ -92,6 +98,9 @@ class SiswaController extends Controller
      */
     public function edit(siswa $siswa)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $jurusans = jurusans::all();
         $kelas = kelas::all();
         $tahunAjars = tahun_ajar::all();
@@ -103,6 +112,9 @@ class SiswaController extends Controller
      */
     public function update(Request $request, siswa $siswa)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'nisn' => 'required|unique:siswas,nisn,' . $siswa->id,
             'nama_lengkap' => 'required',
@@ -141,6 +153,9 @@ class SiswaController extends Controller
      */
     public function destroy(siswa $siswa)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $siswa->delete();
 
         return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus.');

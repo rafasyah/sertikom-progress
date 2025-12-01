@@ -21,6 +21,9 @@ class JurusanController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         return view('jurusan.create');
     }
 
@@ -29,6 +32,9 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'kode_jurusan' => 'required|unique:jurusans',
             'nama_jurusan' => 'required',
@@ -52,6 +58,9 @@ class JurusanController extends Controller
      */
     public function edit(jurusans $jurusan)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         return view('jurusan.edit', compact('jurusan'));
     }
 
@@ -60,6 +69,9 @@ class JurusanController extends Controller
      */
     public function update(Request $request, jurusans $jurusan)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'kode_jurusan' => 'required|unique:jurusans,kode_jurusan,' . $jurusan->id,
             'nama_jurusan' => 'required',
@@ -75,6 +87,9 @@ class JurusanController extends Controller
      */
     public function destroy(jurusans $jurusan)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $jurusan->delete();
 
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil dihapus.');

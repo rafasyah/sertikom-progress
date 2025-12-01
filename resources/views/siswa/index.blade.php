@@ -4,9 +4,11 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Siswa') }}
             </h2>
+            @if(auth()->user()->role === 'admin')
             <a href="{{ route('siswa.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Tambah Siswa
             </a>
+            @endif
         </div>
     </x-slot>
 
@@ -118,6 +120,7 @@
                                                     </svg>
                                                     Lihat
                                                 </a>
+                                                @if(auth()->user()->role === 'admin')
                                                 <a href="{{ route('siswa.edit', $siswa) }}"
                                                    class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium text-blue-700 bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors duration-200">
                                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,6 +139,7 @@
                                                         Hapus
                                                     </button>
                                                 </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

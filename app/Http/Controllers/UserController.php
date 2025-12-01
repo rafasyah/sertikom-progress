@@ -22,6 +22,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         return view('user.create');
     }
 
@@ -30,6 +33,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -60,6 +66,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         return view('user.edit', compact('user'));
     }
 
@@ -68,6 +77,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -95,6 +107,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $user->delete();
 
         return redirect()->route('user.index')->with('success', 'User berhasil dihapus.');

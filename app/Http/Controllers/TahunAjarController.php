@@ -21,6 +21,9 @@ class TahunAjarController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         return view('tahun_ajar.create');
     }
 
@@ -29,6 +32,9 @@ class TahunAjarController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'kode_tahun_ajar' => 'required|unique:tahun_ajars',
             'nama_tahun_ajar' => 'required',
@@ -52,6 +58,9 @@ class TahunAjarController extends Controller
      */
     public function edit(tahun_ajar $tahunAjar)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         return view('tahun_ajar.edit', compact('tahunAjar'));
     }
 
@@ -60,6 +69,9 @@ class TahunAjarController extends Controller
      */
     public function update(Request $request, tahun_ajar $tahunAjar)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'kode_tahun_ajar' => 'required|unique:tahun_ajars,kode_tahun_ajar,' . $tahunAjar->id,
             'nama_tahun_ajar' => 'required',
@@ -75,6 +87,9 @@ class TahunAjarController extends Controller
      */
     public function destroy(tahun_ajar $tahunAjar)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $tahunAjar->delete();
 
         return redirect()->route('tahun-ajar.index')->with('success', 'Tahun Ajar berhasil dihapus.');

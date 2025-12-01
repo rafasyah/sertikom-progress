@@ -23,6 +23,9 @@ class KelasController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $jurusans = jurusans::all();
         $tahunAjars = tahun_ajar::all();
         return view('kelas.create', compact('jurusans', 'tahunAjars'));
@@ -33,6 +36,9 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'nama_kelas' => 'required',
             'level_kelas' => 'required|in:X,XI,XII',
@@ -58,6 +64,9 @@ class KelasController extends Controller
      */
     public function edit(kelas $kela)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $jurusans = jurusans::all();
         $tahunAjars = tahun_ajar::all();
         return view('kelas.edit', compact('kela', 'jurusans', 'tahunAjars'));
@@ -68,6 +77,9 @@ class KelasController extends Controller
      */
     public function update(Request $request, kelas $kela)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $request->validate([
             'nama_kelas' => 'required',
             'level_kelas' => 'required|in:X,XI,XII',
@@ -85,6 +97,9 @@ class KelasController extends Controller
      */
     public function destroy(kelas $kela)
     {
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya admin yang boleh mengakses.');
+        }
         $kela->delete();
 
         return redirect()->route('kelas.index')->with('success', 'Kelas berhasil dihapus.');

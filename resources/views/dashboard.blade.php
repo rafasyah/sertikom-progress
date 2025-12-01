@@ -103,100 +103,190 @@
                 </div>
             </div>
 
-            <!-- Siswa Terbaru and Distribusi Siswa Per Jurusan Side by Side -->
-            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Siswa Terbaru -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6">
-                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Siswa Terbaru</h3>
-                        <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-700">
-                                    <tr>
-                                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                            NISN
-                                        </th>
-                                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                            Nama
-                                        </th>
-                                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                            Jurusan
-                                        </th>
-                                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                            Kelas
-                                        </th>
-                                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                            Tahun Ajar
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                    @forelse($latestSiswa as $siswa)
-                                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                                                    {{ $siswa->nisn }}
-                                                </span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $siswa->nama_lengkap }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $siswa->jurusan->nama_jurusan }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $siswa->kelas->nama_kelas }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                                {{ $siswa->tahun_ajar->nama_tahun_ajar }}
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="px-6 py-12 text-center">
-                                                <div class="flex flex-col items-center">
-                                                    <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                                                    </svg>
-                                                    <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1">Belum ada data siswa</h3>
-                                                    <p class="text-sm text-gray-500 dark:text-gray-400">Siswa terbaru akan muncul di sini.</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+           <!-- Siswa Terbaru and Distribusi Siswa Per Jurusan Side by Side -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-                <!-- Distribusi Siswa Per Jurusan -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6">
-                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Distribusi Siswa Per Jurusan</h3>
-                        <div class="grid grid-cols-1 gap-4">
-                            @forelse($siswaPerJurusan as $jurusan)
-                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $jurusan->nama_jurusan }}</h4>
-                                            <p class="text-2xl font-bold text-gray-700 dark:text-gray-300">{{ $jurusan->siswa_count }}</p>
-                                        </div>
-                                        <div class="text-gray-400">
-                                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                            </svg>
-                                        </div>
+    <!-- Siswa Terbaru -->
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg h-full flex flex-col">
+        <div class="p-6 flex-grow flex flex-col">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Siswa Terbaru</h3>
+
+            <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 flex-grow">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 h-full">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">NISN</th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Nama</th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Jurusan</th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Kelas</th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Tahun Ajar</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        @forelse($latestSiswa as $siswa)
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                                        {{ $siswa->nisn }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->nama_lengkap }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->jurusan->nama_jurusan }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->kelas->nama_kelas }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->tahun_ajar->nama_tahun_ajar }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="px-6 py-12 text-center">
+                                    <div class="flex flex-col items-center">
+                                        <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                                        </svg>
+                                        <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1">Belum ada data siswa</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Siswa terbaru akan muncul di sini.</p>
                                     </div>
-                                </div>
-                            @empty
-                                <div class="text-center py-4">
-                                    <p class="text-gray-500 dark:text-gray-400">Belum ada data jurusan</p>
-                                </div>
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </div>
+
+  <!-- Distribusi Siswa Per Jurusan (fixed, proportional, clickable small-text legend buttons) -->
+<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="p-6">
+        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
+            Distribusi Siswa Per Jurusan
+        </h3>
+
+        <!-- Chart Wrapper (fixed height so chart isn't squashed) -->
+        <div class="w-full flex justify-center">
+            <div class="w-full max-w-md" style="height: 360px;">
+                <canvas id="jurusanPieChart" aria-label="Distribusi Siswa Per Jurusan" role="img"></canvas>
+            </div>
+        </div>
+
+        <!-- Proportional clickable legend buttons (small text) -->
+        <div id="jurusanLegend" class="flex flex-wrap gap-2 justify-center mt-6"></div>
+    </div>
+</div>
+
+<!-- single Chart.js include -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Data from server
+    const dataJurusan = @json($siswaPerJurusan->pluck('siswa_count'));
+    const labelJurusan = @json($siswaPerJurusan->pluck('nama_jurusan'));
+
+    // Ensure we have enough colors for labels (generate extras if needed)
+    const baseColors = [
+        'rgba(255, 99, 132, 0.9)',
+        'rgba(54, 162, 235, 0.9)',
+        'rgba(255, 206, 86, 0.9)',
+        'rgba(75, 192, 192, 0.9)',
+        'rgba(153, 102, 255, 0.9)',
+        'rgba(255, 159, 64, 0.9)',
+        'rgba(99, 255, 132, 0.9)',
+        'rgba(54, 99, 235, 0.9)'
+    ];
+
+    function randomColor(opacity = 0.9) {
+        const r = Math.floor(80 + Math.random() * 160);
+        const g = Math.floor(80 + Math.random() * 160);
+        const b = Math.floor(80 + Math.random() * 160);
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    }
+
+    const colors = labelJurusan.map((_, i) => baseColors[i] ?? randomColor());
+
+    // Chart setup
+    const ctx = document.getElementById('jurusanPieChart').getContext('2d');
+
+    const pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labelJurusan,
+            datasets: [{
+                data: dataJurusan,
+                backgroundColor: colors,
+                borderColor: '#111827', // subtle border for contrast
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: { display: false }, // we use custom legend
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const val = context.parsed ?? 0;
+                            const total = context.chart._metasets ? context.chart._metasets[context.datasetIndex].total : context.chart._metasets;
+                            // Use default tooltip content (label and value)
+                            return label + ': ' + val;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Build equal-size, clickable legend buttons
+(function buildLegendButtons() {
+    const legendContainer = document.getElementById('jurusanLegend');
+    legendContainer.innerHTML = '';
+
+    const fixedWidth = 150; // <-- all buttons same width
+
+    labelJurusan.forEach((label, index) => {
+        const value = +dataJurusan[index] || 0;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className =
+            'text-xs font-semibold text-white px-3 py-1 rounded-lg shadow flex items-center justify-center transition-opacity duration-150';
+        btn.style.backgroundColor = colors[index];
+        btn.style.width = fixedWidth + 'px';
+        btn.style.whiteSpace = 'nowrap';
+        btn.style.overflow = 'hidden';
+        btn.style.textOverflow = 'ellipsis';
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('title', `${label} (${value})`);
+
+        btn.innerHTML = `<span class="truncate">${label} (${value})</span>`;
+
+        // Click toggles chart slice
+        btn.addEventListener('click', () => {
+            pieChart.toggleDataVisibility(index);
+            pieChart.update();
+
+            const hidden = pieChart.getDataVisibility(index) === false;
+            if (hidden) {
+                btn.classList.add('opacity-50');
+                btn.setAttribute('aria-pressed', 'false');
+            } else {
+                btn.classList.remove('opacity-50');
+                btn.setAttribute('aria-pressed', 'true');
+            }
+        });
+
+        legendContainer.appendChild(btn);
+    });
+})();
+
+       
+
+</script>
+
+
+
+</div>
+
     </div>
 </x-app-layout>

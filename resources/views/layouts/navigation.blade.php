@@ -4,7 +4,7 @@
     <div class="flex items-center justify-center h-16 bg-blue-600">
         <a href="{{ route('dashboard') }}" class="flex items-center">
             <x-application-logo class="h-8 w-auto fill-current text-white" />
-            <span class="ml-2 text-lg font-semibold text-white">SMK Sertikom</span>
+            <span class="ml-2 text-lg font-semibold text-white">SMK Kesatuan Mandiri</span>
         </a>
     </div>
 
