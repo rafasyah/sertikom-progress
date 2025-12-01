@@ -40,7 +40,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-            'role' => 'required|in:admin',
+            'role' => 'required|in:admin,user',
         ]);
 
         User::create([
@@ -84,7 +84,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:6|confirmed',
-            'role' => 'required|in:admin',
+            'role' => 'required|in:admin,user',
         ]);
 
         $data = [

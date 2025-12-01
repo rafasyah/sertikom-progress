@@ -40,6 +40,15 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        // Create normal user for testing view-only access
+        User::firstOrCreate([
+            'email' => 'user@example.com',
+        ], [
+            'name' => 'Regular User',
+            'password' => bcrypt('password'),
+            'role' => 'user',
+        ]);
+
         // Seed Tahun Ajar (6 years for pagination)
         $tahunAjars = [];
         for ($i = 2019; $i <= 2024; $i++) {
