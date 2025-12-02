@@ -111,30 +111,67 @@
         <div class="p-6 flex-grow flex flex-col">
             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Siswa Terbaru</h3>
 
-            <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 flex-grow">
+            <!-- Mobile Card Layout -->
+            <div class="block sm:hidden space-y-4">
+                @forelse($latestSiswa as $siswa)
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                                        {{ $siswa->nisn }}
+                                    </span>
+                                </div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $siswa->nama_lengkap }}</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    {{ $siswa->jurusan->nama_jurusan }} • {{ $siswa->kelas->nama_kelas }} • {{ $siswa->tahun_ajar->nama_tahun_ajar }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 text-center">
+                        <div class="flex flex-col items-center">
+                            <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                            <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1">Belum ada data siswa</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Siswa terbaru akan muncul di sini.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Desktop Table Layout -->
+            <div class="hidden sm:block overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 flex-grow">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 h-full">
                     <thead class="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">NISN</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Nama</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Jurusan</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Kelas</th>
-                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Tahun Ajar</th>
+                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">NISN</th>
+                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Nama</th>
+                            <th class="hidden sm:table-cell px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Jurusan</th>
+                            <th class="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Kelas</th>
+                            <th class="hidden lg:table-cell px-3 sm:px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Tahun Ajar</th>
                         </tr>
                     </thead>
 
                     <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                         @forelse($latestSiswa as $siswa)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                                <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                <td class="px-3 sm:px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-100">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
                                         {{ $siswa->nisn }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->nama_lengkap }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->jurusan->nama_jurusan }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->kelas->nama_kelas }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->tahun_ajar->nama_tahun_ajar }}</td>
+                                <td class="px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                                    <div>{{ $siswa->nama_lengkap }}</div>
+                                    <div class="sm:hidden text-xs text-gray-500 mt-1">
+                                        {{ $siswa->jurusan->nama_jurusan }} • {{ $siswa->kelas->nama_kelas }}
+                                    </div>
+                                </td>
+                                <td class="hidden sm:table-cell px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->jurusan->nama_jurusan }}</td>
+                                <td class="hidden md:table-cell px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->kelas->nama_kelas }}</td>
+                                <td class="hidden lg:table-cell px-3 sm:px-6 py-4 text-sm text-gray-900 dark:text-gray-100">{{ $siswa->tahun_ajar->nama_tahun_ajar }}</td>
                             </tr>
                         @empty
                             <tr>
@@ -162,9 +199,9 @@
             Distribusi Siswa Per Jurusan
         </h3>
 
-        <!-- Chart Wrapper (fixed height so chart isn't squashed) -->
+        <!-- Chart Wrapper (responsive height) -->
         <div class="w-full flex justify-center">
-            <div class="w-full max-w-md" style="height: 360px;">
+            <div class="w-full max-w-md" style="height: 300px; min-height: 250px;">
                 <canvas id="jurusanPieChart" aria-label="Distribusi Siswa Per Jurusan" role="img"></canvas>
             </div>
         </div>
@@ -237,29 +274,31 @@
         }
     });
 
-    // Build equal-size, clickable legend buttons
-(function buildLegendButtons() {
-    const legendContainer = document.getElementById('jurusanLegend');
-    legendContainer.innerHTML = '';
+    // Build responsive, clickable legend buttons
+    (function buildLegendButtons() {
+        const legendContainer = document.getElementById('jurusanLegend');
+        legendContainer.innerHTML = '';
 
-    const fixedWidth = 150; // <-- all buttons same width
+        // Responsive width based on screen size
+        const isMobile = window.innerWidth < 640;
+        const fixedWidth = isMobile ? 120 : 150;
 
-    labelJurusan.forEach((label, index) => {
-        const value = +dataJurusan[index] || 0;
+        labelJurusan.forEach((label, index) => {
+            const value = +dataJurusan[index] || 0;
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className =
-            'text-xs font-semibold text-white px-3 py-1 rounded-lg shadow flex items-center justify-center transition-opacity duration-150';
-        btn.style.backgroundColor = colors[index];
-        btn.style.width = fixedWidth + 'px';
-        btn.style.whiteSpace = 'nowrap';
-        btn.style.overflow = 'hidden';
-        btn.style.textOverflow = 'ellipsis';
-        btn.setAttribute('aria-pressed', 'true');
-        btn.setAttribute('title', `${label} (${value})`);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className =
+                'text-xs font-semibold text-white px-2 sm:px-3 py-1 rounded-lg shadow flex items-center justify-center transition-opacity duration-150';
+            btn.style.backgroundColor = colors[index];
+            btn.style.width = fixedWidth + 'px';
+            btn.style.whiteSpace = 'nowrap';
+            btn.style.overflow = 'hidden';
+            btn.style.textOverflow = 'ellipsis';
+            btn.setAttribute('aria-pressed', 'true');
+            btn.setAttribute('title', `${label} (${value})`);
 
-        btn.innerHTML = `<span class="truncate">${label} (${value})</span>`;
+            btn.innerHTML = `<span class="truncate">${label} (${value})</span>`;
 
         // Click toggles chart slice
         btn.addEventListener('click', () => {

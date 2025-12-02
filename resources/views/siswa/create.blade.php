@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Tambah Siswa') }}
         </h2>
     </x-slot>
@@ -134,8 +134,8 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-end pt-6">
-                            <x-primary-button class="px-6 py-3 text-base">
+                        <div class="flex justify-center sm:justify-end pt-6">
+                            <x-primary-button class="w-full sm:w-auto px-6 py-3 text-base">
                                 {{ __('Simpan') }}
                             </x-primary-button>
                         </div>
